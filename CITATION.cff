@@ -1,14 +1,16 @@
 cff-version: 1.2.0
-message: 'Please cite both the working paper and this versioned replication archive, once deposited.'
+message: 'Please cite the research note and this versioned software archive when using the replication materials.'
 title: 'Financial Pessimism and the Timing of Saving: Replication Materials'
 type: software
 authors:
   - family-names: Hansak
     given-names: Alexander
-version: '1.1.0'
+version: '1.1.1'
 abstract: 'Nonconfidential source code, survey-documentation metadata, numerical verification reports and aggregate results for Financial Pessimism and the Timing of Saving. Licensed UKDS respondent-level data are excluded.'
 keywords:
   - household saving
   - subjective financial expectations
   - replication
   - survey-weighted panel estimation
+repository-code: 'https://github.com/AlexanderPaulHansak/financial-pessimism-replication'
+license: MIT

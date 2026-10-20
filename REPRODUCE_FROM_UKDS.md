@@ -4,7 +4,7 @@ This document distinguishes verifying the **released results** (no licensed data
 
 ## A. Check archive integrity and published numerical evidence (no data)
 
-Inside the assembled/unpacked `Financial_Pessimism_Replication_v1.1.0` folder, use:
+Inside the assembled/unpacked `Financial_Pessimism_Replication_v1.1.1` folder, use:
 
 ```text
 python tools/VERIFY_AGGREGATES.py . --full
