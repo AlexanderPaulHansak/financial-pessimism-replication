@@ -1,0 +1,3 @@
+age_group,N_complete_realization,N_valid_past,N_valid_management,N_positive_income,N_positive_endpoint_LW,N_adjusted,N_adjusted_with_endpoint_LW
+18-34,53157,53085,53124,52713,40466,52612,40276
+35-59,78192,78105,78173,77496,67808,77390,67635

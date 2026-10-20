@@ -1,0 +1,4 @@
+stage,spec,outcome,null,F,df1,df2,p
+06_AGE_HETEROGENEITY,four_exploratory_age_bands,save,no within-original-age-group difference,3.46762686162107,2,1389,0.0314612493886138
+06_AGE_HETEROGENEITY,four_exploratory_age_bands,next_save,no within-original-age-group difference,3.3220297368886,2,1389,0.0363664081439992
+06_AGE_HETEROGENEITY,four_exploratory_age_bands,next_minus_current,no within-original-age-group difference,0.999894199097814,2,1389,0.368183030433023

@@ -1,0 +1,326 @@
+
+% This file is the SINGLE source of appendix content for both configurations.
+% Numbering and section depth are set by the compilation master.
+This appendix documents the survey measures and their questionnaire wording, sample construction, survey inference, robustness checks, supplementary saving-amount and realised-resource analyses, and a forecast--realization diagnostic. The diagnostic uses a different estimator and control set from the main analysis and does not identify a causal mechanism.
+
+\section{Survey instruments, wording, and coding}\label{sec:questions}
+
+The study uses harmonised individual-interview variables from the British Household Panel Survey (BHPS) and Understanding Society (UKHLS). The substantive measures concern respondents' own financial situations rather than aggregate economic prospects. Table~\ref{tab:questionmap} identifies the exact harmonised variable, the relevant representative instrument, and the codes retained in estimation. The official questionnaire sources are \citet{BHPSWave3Questionnaire}, \citet{UKHLSWave2Savings}, \citet{UKHLSWave4Outlook}, and \citet{UKHLSWave4Management}. The coding of additional household covariates is described below.
+
+\begin{table}[!htbp]
+\centering
+\caption{Questionnaire-item crosswalk for financial expectations and saving}
+\label{tab:questionmap}
+\begin{threeparttable}
+\footnotesize
+\setlength{\tabcolsep}{3.5pt}
+\begin{tabular}{@{}p{0.22\linewidth}p{0.29\linewidth}p{0.43\linewidth}@{}}
+\toprule
+Construct / variable & Representative questionnaire location & Coding in this study\\
+\midrule
+Future personal finances, BHPS \texttt{fisitx} & BHPS Wave 3, F7 & 1: better; 2: worse; 3: about the same. Indicators for 1 and 2; 3 is reference.\\[4pt]
+Future personal finances, UKHLS \texttt{finfut} & UKHLS Wave 4, finances module & Same three substantive categories as BHPS.\\[4pt]
+Current financial management, \texttt{finnow} & BHPS Wave 3, F4; UKHLS Wave 4 & Five ordered response categories, included as categorical controls (not assumed cardinal).\\[4pt]
+Earlier-year financial comparison, BHPS \texttt{fisitc} & BHPS Wave 3, F5 & 1: better; 2: worse; 3: about the same; measured at the \emph{next} interview in the diagnostic.\\[4pt]
+Saving participation, \texttt{save} & BHPS Wave 3, F12; UKHLS Wave 2 savings module & 1: explicitly yes; 2: explicitly no; mapped to a binary outcome of 1 and 0 respectively.\\
+\bottomrule
+\end{tabular}
+\begin{tablenotes}[flushleft]\footnotesize
+\item \textit{Notes:} Only substantive responses from eligible individual interviews are used. Proxy interviews, refusals, other nonsubstantive responses, and structurally unasked items are excluded, not coded as zero or the reference category. Variable names are harmonised suffixes. Source TAB files use wave-specific prefixes.
+\end{tablenotes}
+\end{threeparttable}
+\end{table}
+\FloatBarrier
+
+The verbatim stems, category labels, interviewer/mode differences, and wave-specific reference pages for these measures appear in Section~\ref{sec:verbatim_items}. In particular, the historical saving-product examples and the shortened web-mode question stems should not be mistaken for identical literal questionnaires in every wave. We retain the stable substantive response coding while acknowledging these differences.
+
+\textbf{Additional covariates and coding rules.} Financial management \texttt{finnow} uses all five positive codes, employment \texttt{jbstat} retains the valid categories 1--15 and 97, and marital status uses the validated \texttt{mastat} variable where available and retains valid cohabitation categories. Age, interview month, and household composition are harmonised or derived quantities. Gross individual and household income use derived monetary variables and are grouped into quintiles within source/wave after removing special missing codes. Roster-based modified OECD equivalence factors distinguish members aged 14 and above from younger children. All negative special survey codes are treated as nonsubstantive for the present indicators, while the original panel code and wave-specific questionnaire guides are authoritative for routing.
+
+\input{WP_questionnaire_verbatim}
+
+\section{Samples, controls, and survey inference}\label{sec:samples}
+
+The BHPS is used in forecast Waves 1--17 with follow-up Waves 2--18. The sample is the available population of observed eligible interviews in this release, not a sample sized in response to a detectable-effect calculation. UKHLS saving occurs in Waves 2, 4, 6, 8, 10 and 13, paired to forecasts in Waves 1, 3, 5, 7, 9 and 12. Valid outcome pairs require 6--18 months between interviews, based on recorded year and month. For transition analyses, prior saving must be observed at an interview strictly preceding the forecast by 6--18 months. Subsequent saving is likewise observed 6--18 months after it. Thus the complete transition observation spans approximately two years, with no information on intermediate saving switches.
+
+\begin{table}[!htbp]
+\centering
+\caption{Characteristics of the published-weight estimation samples}
+\label{tab:samples}
+\begin{threeparttable}
+\small
+\begin{tabular}{@{}lrr@{}}
+\toprule
+& BHPS & UKHLS\\
+\midrule
+Forecast--follow-up observations & 104,848 & 85,514\\
+Unique respondents & 12,644 & 23,166\\
+Mean age at forecast & 37.9 & 40.0\\
+Ages 18--34 (\%) & 41.8 & 34.7\\
+Forecast worse (\%) & 9.7 & 13.7\\
+Forecast better (\%) & 34.7 & 30.7\\
+Forecast unchanged (\%) & 55.5 & 55.6\\
+Mean forecast--follow-up interval (months) & 11.9 & 12.0\\
+Subsequent saving (\%) & 44.9 & 47.4\\
+Forecast interview years & 1991--2008 & 2009--2022\\
+Subsequent interview years & 1992--2009 & 2010--2023\\
+\bottomrule
+\end{tabular}
+\begin{tablenotes}[flushleft]\footnotesize
+\item \textit{Notes:} Means and shares describe the \emph{conditional estimation samples}, using normalised longitudinal weights not unconditional UK population estimates. Current saving is 45.0\% in the BHPS sample. Saving is not generally asked at UKHLS forecast interviews.
+\end{tablenotes}
+\end{threeparttable}
+\end{table}
+\FloatBarrier
+
+Baseline covariates, all measured at the forecast interview, include current financial management, employment and marital status, personal gross-income categories, household income and composition, tenure, and age terms. Gross household resources use \texttt{fihhmngrs\_dv}. The BHPS net-household-income sensitivity uses \texttt{hhneti}, converted from weekly to monthly units, while UKHLS uses \texttt{fihhmnnet1\_dv} (before council tax). These net concepts are not identical, and net-resource controls are therefore a sensitivity rather than the definition of a harmonised level. Household incomes are adjusted using the modified OECD equivalence factor and ranked into quintiles within each source wave. For BHPS, reconstructed roster factors agree within $10^{-6}$ with native factors for 99.85\% of 109,688 comparable households, while 165 differ by up to 0.2. UKHLS uses the positive \texttt{ieqmoecd\_dv} equivalence factor.
+
+For BHPS forecast--endpoint pairs, published individual-interview weights at the endpoint are \texttt{indin91\_lw} through endpoint Wave 9, \texttt{indin99\_lw} at endpoints 10--11, and \texttt{indin01\_lw} thereafter. Three-interview transitions use \texttt{indin91\_lw} through endpoint Wave 10, \texttt{indin99\_lw} at endpoints 11--12, and \texttt{indin01\_lw} thereafter. UKHLS uses \texttt{indinus\_lw} at endpoint Wave 2, \texttt{indinub\_lw} at 4 and 6, and \texttt{indinui\_lw} at 8, 10 and 13. Positive weights are normalized within source and forecast wave, while weights with an ineligible baseline are not used. The original-GB sensitivity retains \texttt{indin91\_lw} throughout.
+
+The main variance estimator aggregates weighted estimating-equation scores by harmonized PSU within stratum, centres the PSU scores within each nonsingleton stratum, applies the factor $m_h/(m_h-1)$ for $m_h>1$, and adds the score outer product for any singleton stratum. It multiplies the resulting sandwich variance by $(N-1)/(N-r_{FE}-K)$, where $r_{FE}$ is the exact rank of the absorbed two-way fixed-effect design and $K$ the number of identified slopes. The corresponding reference confidence intervals use survey degrees of freedom equal to the number of PSUs minus the number of strata. This stated survey-design convention is distinct from respondent-level clustering.
+
+The original Python estimator and an independently implemented R/\texttt{fixest} estimator were run on identical, locally stored canonical model-ready samples on 16 October 2026. All 21 reported headline coefficient/SE comparisons passed: the maximum cross-software coefficient discrepancy was $1.94\times10^{-13}$ percentage points and the maximum survey-SE discrepancy was $3.41\times10^{-10}$ points. The R implementation independently calculated the two-way-FE dummy rank and stratified-PSU score covariance. Its identified slope counts match the Python counts (50 BHPS, 57 UKHLS prospective, 55 UKHLS strict). The complete numerical diagnostics are stored as aggregate CSVs in the project's archived verification freeze. These computations verify numerical implementation, not causal identification or validity of the survey-design assumptions.
+
+\Needspace{10\baselineskip}
+\section{BHPS robustness and supplementary analyses}\label{sec:robustness}
+
+Table~\ref{tab:robust} varies the household-resource controls, weighting assumptions, and length of observed panel histories. Each row is a separate conditional projection on its stated sample. The comparisons should not be read as treatment effects.
+
+\begin{table}[!ht]
+\centering
+\caption{BHPS young-adult pessimism association under alternative specifications}
+\label{tab:robust}
+\begin{threeparttable}
+\footnotesize
+\setlength{\tabcolsep}{2.5pt}
+\begin{tabular}{@{}p{0.32\linewidth}cccc@{}}
+\toprule
+Specification & Current & Subsequent & Change & $N$\\
+\midrule
+Individual controls & \ci{+4.34\stars{***}}{+2.63, +6.05} & \ci{$-5.16$\stars{***}}{$-6.75$, $-3.57$} & \ci{$-9.50$\stars{***}}{$-11.71$, $-7.29$} & 124,659\\[4pt]
+Add gross household controls & \ci{+3.90\stars{***}}{+2.16, +5.64} & \ci{$-5.21$\stars{***}}{$-6.80$, $-3.62$} & \ci{$-9.11$\stars{***}}{$-11.34$, $-6.88$} & 124,086\\[4pt]
+Gross controls, net-income sample & \ci{+4.03\stars{***}}{+2.20, +5.87} & \ci{$-4.96$\stars{***}}{$-6.74$, $-3.17$} & \ci{$-8.99$\stars{***}}{$-11.35$, $-6.63$} & 109,572\\[4pt]
+Net household controls & \ci{+4.05\stars{***}}{+2.22, +5.89} & \ci{$-4.94$\stars{***}}{$-6.73$, $-3.15$} & \ci{$-8.99$\stars{***}}{$-11.36$, $-6.63$} & 109,572\\[5pt]
+Published longitudinal weights & \ci{+4.19\stars{***}}{+2.10, +6.29} & \ci{$-5.15$\stars{***}}{$-7.31$, $-3.00$} & \ci{$-9.35$\stars{***}}{$-12.30$, $-6.40$} & 104,848\\[4pt]
+Unweighted, positive-LW sample & \ci{+3.41\stars{***}}{+1.50, +5.32} & \ci{$-5.20$\stars{***}}{$-6.98$, $-3.43$} & \ci{$-8.61$\stars{***}}{$-11.12$, $-6.11$} & 104,848\\[4pt]
+Original GB 1991 weights & \ci{+3.54\stars{**}}{+1.33, +5.74} & \ci{$-4.42$\stars{***}}{$-6.82$, $-2.02$} & \ci{$-7.95$\stars{***}}{$-11.20$, $-4.71$} & 68,390\\[4pt]
+Baseline cross-sectional weights & \ci{+3.79\stars{***}}{+1.57, +6.02} & \ci{$-5.34$\stars{***}}{$-7.25$, $-3.43$} & \ci{$-9.13$\stars{***}}{$-11.94$, $-6.33$} & 117,186\\[4pt]
+Tailored response weights & \ci{+3.82\stars{***}}{+1.58, +6.05} & \ci{$-5.42$\stars{***}}{$-7.34$, $-3.50$} & \ci{$-9.24$\stars{***}}{$-12.05$, $-6.42$} & 117,186\\[4pt]
+Tailored weights, cap at p99 & \ci{+3.85\stars{***}}{+1.63, +6.08} & \ci{$-5.45$\stars{***}}{$-7.34$, $-3.56$} & \ci{$-9.30$\stars{***}}{$-12.09$, $-6.52$} & 117,186\\[5pt]
+At least eight usable pairs & \ci{+3.45\stars{***}}{+1.60, +5.31} & \ci{$-5.22$\stars{***}}{$-7.10$, $-3.35$} & \ci{$-8.68$\stars{***}}{$-11.22$, $-6.14$} & 86,392\\[4pt]
+Balanced forecast Waves 4--14 & \ci{+7.25\stars{***}}{+3.21, +11.29} & \ci{$-5.77$\stars{**}}{$-9.61$, $-1.93$} & \ci{$-13.02$\stars{***}}{$-18.72$, $-7.32$} & 23,617\\[4pt]
+Without person effects & \ci{+4.87\stars{***}}{+3.36, +6.37} & \ci{$-3.73$\stars{***}}{$-5.33$, $-2.13$} & \ci{$-8.60$\stars{***}}{$-10.30$, $-6.89$} & 126,748\\
+\bottomrule
+\end{tabular}
+\begin{tablenotes}[flushleft]\footnotesize
+\item \textit{Notes:} Point estimates in percentage points, referring to ages 18--34 relative to unchanged forecasts, 95\% confidence-interval endpoints on the second line. Resource-only and panel-history specifications are unweighted unless otherwise stated. Estimation samples vary across rows. Baseline-XW and tailored-IPW rows use their own baseline-weight risk set. IPW intervals condition on estimated response probabilities and exclude first-stage uncertainty. \siglegend
+\end{tablenotes}
+\end{threeparttable}
+\end{table}
+\FloatBarrier
+
+\begin{table}[!htbp]
+\centering
+\caption{BHPS saving transitions conditional on an earlier saving report}
+\label{tab:transitions}
+\begin{threeparttable}
+\small
+\begin{tabular}{@{}lccc@{}}
+\toprule
+& Ages 18--34 & Ages 35--59 & $N$ (people)\\
+\midrule
+Entry among prior non-savers & \ci{$-5.13$\stars{**}}{$-8.25$, $-2.01$} & \ci{$-1.04$}{$-3.02$, +0.93} & 49,532 (8,773)\\[4pt]
+Exit among prior savers & \ci{+4.34\stars{*}}{+0.26, +8.41} & \ci{+5.89\stars{***}}{+3.53, +8.25} & 40,309 (7,282)\\
+\bottomrule
+\end{tabular}
+\begin{tablenotes}[flushleft]\footnotesize
+\item \textit{Notes:} Percentage-point coefficients for pessimism versus unchanged outlook, with 95\% confidence-interval endpoints on the second line. The prior saving report is strictly before the forecast, while the endpoint is after it. Entry and exit are transitions between observed reports, not event dates. The models use survey-design inference, longitudinal weights covering all required observations, person and interview-time effects, and household controls. \siglegend
+\end{tablenotes}
+\end{threeparttable}
+\end{table}
+\FloatBarrier
+
+UKHLS transition estimates are imprecise. Among young prior non-savers, the entry estimate is +2.17 points (95\% CI $[-3.68,8.01]$), and among young prior savers the exit estimate is +1.44 points (95\% CI $[-4.93,7.81]$). They do not establish the corresponding BHPS transition result for the later study.
+
+\subsection{Optimistic forecasts in the matched BHPS specification}\label{sec:optimism}
+
+Because the preferred regressions also include the indicator for expecting better finances, it is possible to examine whether the horizon dependence is confined to pessimism. Table~\ref{tab:optimism_canonical} reports those coefficients and their survey-design confidence intervals, computed on \emph{exactly the same canonical BHPS sample} as the headline results. Among ages 18--34, optimism is associated with 2.09 percentage points \emph{less} saving at the forecast interview, a positive but imprecisely estimated 1.17-point prospective association, and a +3.27-point difference between horizons (95\% CI [+1.71,+4.82]). The corresponding older-adult timing contrast is +2.37 points (95\% CI [+1.15,+3.60]). The age difference in optimism's timing gradient, +0.89 points (95\% CI [-1.05,+2.84]), is imprecise.
+
+Thus the signed timing gradient for optimism is opposite to that for pessimism. This is an additional \emph{descriptive} finding: opposite-signed associations do not establish symmetric behavioural responses or distinguish anticipatory adjustments to resources from belief-driven changes in saving preferences.
+
+\input{WP_optimism_canonical}
+
+
+\Needspace{12\baselineskip}
+\subsection{Monthly saving amounts}\label{sec:amounts}
+
+The main results describe participation in reported saving. The BHPS also records respondents' usual monthly amount saved (\texttt{saved}) when they answer yes to the saving question. I assign zero only to explicit non-savers and treat unanswered, invalid, and top-coded amount reports as unavailable. Amounts are converted to approximate 2015 pounds using the annual UK all-items CPI (ONS series D7BT; \citealp{ONSCPI_D7BT}), then transformed as $\operatorname{asinh}(\text{real monthly saving}/100)$ to retain genuine zeros. Of the 104,848 canonical pairs, 98,054 have usable amounts at both interviews. The weighted two-way-fixed-effect projection, original covariates, and stratified-PSU inference are otherwise retained, and all three amount outcomes use these same observations.
+
+\begin{table}[!htbp]
+\centering
+\caption{Pessimism and reported monthly saving amounts: BHPS}
+\label{tab:amounts}
+\begin{threeparttable}
+\small
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{@{}p{0.37\linewidth}ccc@{}}
+\toprule
+ & Ages 18--34 & Ages 35--59 & Young minus older\\
+\midrule
+\multicolumn{4}{@{}l}{\emph{Panel A: $\operatorname{asinh}(\text{real monthly amount}/100)$; $N=98{,}054$}}\\[3pt]
+At forecast interview & \ci{$+0.100$}{[+0.065,+0.135]} & \ci{$+0.029$}{[+0.006,+0.053]} & \ci{$+0.071$}{[+0.027,+0.115]}\\[5pt]
+At next interview & \ci{$-0.095$}{[$-0.134$,$-0.057$]} & \ci{$-0.064$}{[$-0.087$,$-0.040$]} & \ci{$-0.032$}{[$-0.076$,+0.013]}\\[5pt]
+Next minus forecast & \ci{$-0.195$}{[$-0.245$,$-0.146$]} & \ci{$-0.093$}{[$-0.123$,$-0.062$]} & \ci{$-0.103$}{[$-0.159$,$-0.047$]}\\[5pt]
+\addlinespace[3pt]
+\multicolumn{4}{@{}l}{\emph{Panel B: $\Delta\log(\text{real monthly amount})$ among continuing savers; $N=30{,}296$}}\\[3pt]
+Next minus forecast & \ci{$-0.243$}{[$-0.332$,$-0.154$]} & \ci{$-0.130$}{[$-0.192$,$-0.068$]} & \ci{$-0.113$}{[$-0.218$,$-0.008$]}\\
+\bottomrule
+\end{tabular}
+\begin{tablenotes}[flushleft]\footnotesize
+\item \textit{Notes:} Coefficients compare worse versus unchanged year-ahead financial outlooks; brackets report two-sided 95\% survey-design confidence intervals. In Panel A, explicit non-savers have a zero amount; pairs with invalid, unreported or top-coded amounts are excluded. All three outcomes use exactly the same 98,054 pairs (12,437 individuals). Panel B selects respondents reporting strictly positive amounts at both interviews (30,296 pairs; 6,746 individuals); its log-change result is conditional on continuing to save and is not a population-intensive-margin effect. The inverse-hyperbolic-sine coefficients are not percentage changes or pound amounts. CPI is annual (2015=100) and does not account for within-year inflation.
+\end{tablenotes}
+\end{threeparttable}
+\end{table}
+\FloatBarrier
+
+The negative timing contrast in Panel A shows that the central sign pattern is not restricted to the yes/no participation outcome. Nevertheless, amounts are self-reported usual contributions rather than observed saving transactions or changes in net assets. Missing amounts and the continuing-saver restriction in Panel B can introduce selection.
+
+\subsection{Subsequent incomes, employment, and saving}\label{sec:resourcecheck}
+
+To assess the informational content of forecasts, I supplement the frozen BHPS model-ready observations with source-wave gross personal income (\texttt{fimngrs\_dv}), gross household income (\texttt{fihhmngrs\_dv}), and reported labour-market status at the next interview. Income variables come from the original BHPS individual/household records and are deflated with the annual CPI. The outcomes in Panel A of Table~\ref{tab:resources} are the change in $\operatorname{asinh}(\text{real monthly gross income}/1000)$ and changes in self-reported employment status. The household-income measure is gross and not equivalised at the follow-up; it is not disposable income. The income projections use 104,828 pairs, and the employment projections use the 79,205 pairs reporting employment or self-employment at the forecast interview.
+
+\begin{table}[!htbp]
+\centering
+\caption{Financial pessimism, subsequent economic circumstances, and saving sensitivity: BHPS}
+\label{tab:resources}
+\begin{threeparttable}
+\footnotesize
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{@{}p{0.49\linewidth}ccc@{}}
+\toprule
+ & Ages 18--34 & Ages 35--59 & $N$\\
+\midrule
+\multicolumn{4}{@{}l}{\emph{Panel A: Prospective circumstances}}\\[2pt]
+Change in real gross personal income$^{a}$ & \ci{$-0.086$}{[$-0.109$,$-0.063$]} & \ci{$-0.040$}{[$-0.056$,$-0.025$]} & 104,828\\[5pt]
+Change in real gross household income$^{a}$ & \ci{$-0.107$}{[$-0.135$,$-0.079$]} & \ci{$-0.041$}{[$-0.057$,$-0.026$]} & 104,828\\[5pt]
+Transition to unemployment$^{b}$ (pp) & \ci{$+0.78$}{[$-0.36$,+1.91]} & \ci{$+0.94$}{[+0.39,+1.50]} & 79,205\\[5pt]
+Exit from employment$^{b}$ (pp) & \ci{$+7.93$}{[+5.73,+10.14]} & \ci{$+4.90$}{[+3.72,+6.08]} & 79,205\\[5pt]
+\addlinespace[3pt]
+\multicolumn{4}{@{}l}{\emph{Panel B: Next-minus-current saving participation (pp)}}\\[2pt]
+Original controls; income-observed sample & \ci{$-9.33$}{[$-12.29$,$-6.37$]} & \ci{$-3.47$}{[$-5.32$,$-1.63$]} & 104,828\\[5pt]
+Plus personal-income change and unemployment & \ci{$-8.56$}{[$-11.49$,$-5.64$]} & \ci{$-3.04$}{[$-4.87$,$-1.21$]} & 104,828\\[5pt]
+Plus household-income change and unemployment & \ci{$-8.56$}{[$-11.52$,$-5.61$]} & \ci{$-3.08$}{[$-4.90$,$-1.25$]} & 104,828\\
+\bottomrule
+\end{tabular}
+\begin{tablenotes}[flushleft]\footnotesize
+\item \textit{Notes:} Worse versus unchanged outlook, with two-sided 95\% stratified-PSU confidence intervals. $^{a}$ Change in $\operatorname{asinh}(\text{real gross monthly income in 2015 pounds}/1000)$, not a log percentage change. $^{b}$ Conditional on employed/self-employed at forecast; employment exit includes states other than unemployment and is not necessarily an involuntary job loss. In Panel B, all specifications use the same observed-income pairs, baseline covariates and fixed effects, and canonical endpoint longitudinal weights. The added post-forecast controls are the income-change transform and an indicator for a transition into unemployment, \emph{not} the broader employment-exit indicator. Such conditioning is descriptive, potentially endogenous, and not a causal mediation decomposition. The complete paired sample contains 104,848 observations.
+\end{tablenotes}
+\end{threeparttable}
+\end{table}
+\FloatBarrier
+
+The income gradients indicate that expectations contain information about subsequent economic circumstances. Both Panel B sensitivity estimates retain a negative saving timing contrast, but their attenuation cannot be attributed to any particular mechanism: contemporaneous and future shocks may jointly affect forecasts, income, employment, and saving. In particular, the broad employment-exit result is not itself included among the post-forecast controls in Panel B. These exploratory estimates do not isolate behavioural responses to pessimistic beliefs.
+
+\subsection{Exploratory age profile of the timing contrast}\label{sec:ageprofile}
+
+Table~\ref{tab:agebands} relaxes the original two-group specification by allowing separate pessimism gradients for ages 18--24, 25--34, 35--44, and 45--59. Estimates come from one weighted two-way-fixed-effect model using all 104,848 canonical pairs, with otherwise unchanged controls and design inference. Each coefficient is negative, but the age categories were chosen during exploratory analysis rather than fixed in advance.
+
+\begin{table}[!htbp]
+\centering
+\caption{Pessimism timing contrasts across exploratory BHPS age bands}
+\label{tab:agebands}
+\begin{threeparttable}
+\small
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{@{}lcr@{}}
+\toprule
+Age at forecast & Next minus forecast (pp) & Observations in band\\
+\midrule
+18--24 & \ci{$-10.98$}{[$-15.49$,$-6.48$]} & 13,752\\[5pt]
+25--34 & \ci{$-8.30$}{[$-12.08$,$-4.53$]} & 25,101\\[5pt]
+35--44 & \ci{$-4.49$}{[$-7.31$,$-1.68$]} & 29,467\\[5pt]
+45--59 & \ci{$-2.68$}{[$-5.04$,$-0.33$]} & 36,528\\
+\bottomrule
+\end{tabular}
+\begin{tablenotes}[flushleft]\footnotesize
+\item \textit{Notes:} Conditional percentage-point coefficients for pessimism versus unchanged outlook; two-sided 95\% stratified-PSU confidence intervals. The observation counts are age-band counts within the same regression sample, not separate regressions. A joint Wald test for additional within-original-group differences (18--24 vs.\ 25--34 and 35--44 vs.\ 45--59) gives $p=0.368$; it does not test the original 18--34 versus 35--59 contrast. A separate continuous-interaction specification estimates a change of $+2.44$ points per additional decade (95\% CI $[+1.11,+3.77]$). Both extensions are exploratory.
+\end{tablenotes}
+\end{threeparttable}
+\end{table}
+\FloatBarrier
+
+The four estimates are consistent with a less negative timing gradient at older ages, but do not establish that the relationship changes discontinuously at the original cutoff. They should not be interpreted as cohort or generational differences.
+
+\Needspace{9\baselineskip}
+\section{Follow-up selection and missing-outcome sensitivity}\label{sec:missing}
+
+Among young baseline respondents meeting controls and positive-weight requirements, weighted follow-up rates are 89.9\% for pessimistic and 91.0\% for unchanged financial forecasts in BHPS. In UKHLS the rates are 77.7\% and 78.1\%, respectively. The response-adjustment exercise constructs a risk set of 133,029 BHPS and 150,811 UKHLS baseline cases after restriction to admissible study populations, baseline controls and design information. Separate weighted response logits by source and forecast wave include outlook, age, controls and available earlier saving. The resulting fitted probabilities are clipped to $[0.05,0.995]$. No fitted probability falls below the lower bound, and 698 baseline fitted probabilities exceed the upper bound. Response-adjusted weights are cross-sectional baseline weights divided by the fitted response probability, with a 99th-percentile cap as a further sensitivity.
+
+\begin{table}[!htbp]
+\centering
+\caption{Illustrative missing-outcome sensitivity: subsequent-saving association, ages 18--34}
+\label{tab:missing}
+\begin{threeparttable}
+\small
+\begin{tabular}{@{}lrr@{}}
+\toprule
+Additional saving probability for missing pessimists & BHPS & UKHLS\\
+\midrule
+Baseline model predictions & $-5.45$ & $-2.11$\\
++10 percentage points & $-4.90$ & $-0.84$\\
++20 percentage points & $-4.35$ & +0.42\\
++40 percentage points & $-3.39$ & +2.60\\
+All missing pessimists assumed to save & $-2.17$ & +4.77\\
+\bottomrule
+\end{tabular}
+\begin{tablenotes}[flushleft]\footnotesize
+\item \textit{Notes:} Completed-data, baseline-weighted point projections (percentage points), not estimates with confidence intervals. Missing outcomes other than those of pessimists are imputed from the baseline response model. These scenarios do not account for first-stage estimation or imputation uncertainty. BHPS completed-data $N=127{,}364$ and UKHLS $N=130{,}386$ after fixed-effect restrictions.
+\end{tablenotes}
+\end{threeparttable}
+\end{table}
+\FloatBarrier
+
+With no assumptions on missing binary outcomes, bounds on \emph{unadjusted weighted group-rate differences} are $[-11.72,7.29]$ percentage points for BHPS and $[-21.58,22.60]$ for UKHLS. Both include zero. These are not bounds on the conditional fixed-effect coefficient. Hence even stable fitted-response sensitivities cannot rule out unrestricted nonrandom attrition.
+
+\section{Supplementary forecast--realization diagnostic}\label{sec:realizations}
+
+This supplementary exercise links BHPS outlook at the forecast interview to financial \emph{change as retrospectively reported at the next interview} (\texttt{fisitc}), and compares the change in saving participation $S_{i,t+1}-S_{it}$. Unlike the primary manuscript model, the following diagnostic uses respondent-clustered standard errors instead of the harmonised survey's PSU/stratum variance estimator. Its controls are also not identical to the main paper's complete covariate specification. Results are presented for diagnostic interpretation only. They should be reproduced in the main estimation pipeline before being treated as a definitive publication result.
+
+The BHPS diagnostic export contains 131,613 valid forecast--saving pairs separated by 6--18 months, while 131,349 also had a valid retrospectively reported realization, involving 19,340 unique respondents. The adjusted young-adult sample has 52,612 pair observations from 10,780 respondents, and the adjusted endpoint-longitudinal-weight sensitivity has 40,276 observations from 7,813 respondents. The adjusted diagnostic includes the available baseline financial-management and past-finance variables, household gross income, and age, together with person and interview-time effects. The models contrast an initial pessimistic forecast with an unchanged forecast \emph{within each later realization category}.
+
+\begin{table}[!htbp]
+\centering
+\caption{BHPS pessimism--saving-change associations by retrospectively reported financial change, ages 18--34}
+\label{tab:realizations}
+\begin{threeparttable}
+\small
+\begin{tabular}{@{}lccc@{}}
+\toprule
+Reported realization & Adjusted change & Later saving, given & Adjusted change,\\
+& unweighted & initial saving & endpoint-LW sensitivity\\
+\midrule
+Unchanged & \ci{$-5.62$\stars{**}}{$-9.81$, $-1.43$} & \ci{$-3.38$\stars{*}}{$-6.46$, $-0.29$} & \ci{$-5.10$}{$-10.79$, +0.58} \\[5pt]
+Worse & \ci{$-8.57$\stars{***}}{$-12.09$, $-5.05$} & \ci{$-4.77$\stars{***}}{$-7.27$, $-2.27$} & \ci{$-7.60$\stars{***}}{$-12.12$, $-3.07$} \\[5pt]
+Better & \ci{$-3.99$}{$-8.45$, +0.47} & \ci{$-0.87$}{$-4.06$, +2.33} & \ci{$-5.45$}{$-11.45$, +0.55} \\
+\bottomrule
+\end{tabular}
+\begin{tablenotes}[flushleft]\footnotesize
+\item \textit{Notes:} Percentage-point differences in conditional pessimism gradients, with normal-approximation 95\% intervals using \emph{person-clustered} standard errors (not survey PSU inference). Unweighted models: 52,612 pairs from 10,780 people. Endpoint-LW sensitivity: 40,276 pairs from 7,813 people. Realization is a subjective retrospective three-category response. Estimation conditions on a variable are measured after the forecast. \siglegend
+\end{tablenotes}
+\end{threeparttable}
+\end{table}
+\FloatBarrier
+
+For the unweighted adjusted change model, the difference between the pessimism slopes in the \emph{worse} and \emph{unchanged} realization strata is $-2.95$ points (SE 2.82; 95\% CI $[-8.47,2.57]$), while the difference is not precisely estimated. Likewise, the weighted estimate among those reporting an unchanged situation is $-5.10$ (95\% CI $[-10.79,0.58]$) and thus does not establish the sign in that sensitivity sample.
+
+The subjective realization categories are not objective resource controls. Even among younger respondents who reported that their financial situation was unchanged, mean \emph{nominal log household income} fell by approximately 0.049 for those who had forecast worsening and rose by approximately 0.046 for those who had forecast no change. These are observational differences in measured income trajectories, not random shocks. Conditioning on realized outcomes can also induce post-treatment or collider selection. The exercise therefore qualifies a narrow mechanical account of the observed reversal but does not rule out anticipated resource changes or identify a belief-induced change in saving.
+
+\clearpage
+\section{Replication, inference, and research practice}\label{sec:replication}
+
+\textbf{Replication archive and canonical verification.} A versioned replication archive, \emph{Financial Pessimism and the Timing of Saving: Replication Materials} (v1.0.0), accompanies the working-paper materials. It consolidates the original, unchanged Python analysis code, the upstream data-construction script, independent R/\texttt{fixest} verification, supplementary scripts, an appendix-table provenance map, and aggregate diagnostic outputs. A SHA-256 manifest records the archived files; licensed respondent-level data are not included. On 16 October 2026, the canonical Python pipeline reproduced the preferred BHPS (104,848 pairs; 12,644 respondents), UKHLS prospective (85,514; 23,166), and UKHLS strict (55,186; 17,639) results. An independently implemented R estimator matched all 21 headline coefficient and survey-design standard-error comparisons on those same model-ready samples (verification tags \texttt{20261016\_140555} and \texttt{20261016\_144150}). These checks establish numerical agreement, not causal identification or independent validation of sample construction.
+
+\textbf{Supplementary-check provenance.} The optimism table uses the frozen BHPS observations (tag \texttt{20261019\_100019}). The saving-amount, realised-resource, employment, and age-profile results in Appendix~\ref{sec:amounts}--\ref{sec:ageprofile} come from the exploratory R/\texttt{fixest} run \texttt{20261019\_204702}. That run first reproduced all nine frozen BHPS pessimism coefficients \emph{and} their design standard errors, then estimated the new outcomes on explicitly audited subsets, retaining the original control specification, weights, fixed effects, and inference convention. Its raw-variable coverage audits and aggregate results are included in the release. The new supplementary outcomes have \emph{not} been independently replicated in a second statistical implementation; models with post-forecast income or employment controls are descriptive sensitivities, not causal decompositions.\par\medskip
+
+\textbf{Multiplicity and exploratory choices.} The BHPS timing-contrast family comprises the younger-adult, older-adult, and age-interaction estimates. With 1,389 PSU-minus-strata degrees of freedom, their two-sided unadjusted $p$-values are approximately $7.01\times10^{-10}$, $0.000236$, and $0.000541$. Holm-adjusted values are $2.10\times10^{-9}$, $0.000473$, and $0.000541$, respectively. This adjustment is a \emph{post-exploration sensitivity}, not a prespecified confirmatory test: the analyses and age-18--34 threshold were chosen during exploratory work. These tests do not establish causality.
+
+\textbf{Additional diagnostics and research practice.} The forecast--realization exercise in Appendix~\ref{sec:realizations} uses different controls and respondent-clustered, rather than stratified-PSU, inference. Its subgroups are not covered by the Holm sensitivity. The analyses are exploratory, not preregistered. Sample sizes reflect eligible interviews, required controls and weights, and within-person variation, not prospective power calculations. Access to UK Data Service study 6614 requires registration and compliance with the End User Licence. The replication materials document the required licensed source files, software, execution order, and known path restrictions, as well as the 89-item--wave questionnaire source audit (Appendix~\ref{sec:verbatim_items}). The nonconfidential archive is prepared for public deposit; a stable repository link or DOI will be reported once assigned. No respondent-level records or full source questionnaires are redistributed.

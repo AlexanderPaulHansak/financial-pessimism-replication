@@ -1,0 +1,21 @@
+{
+  "change_type": "Interface/naming only: active environment names and the filename alias of the archived original source",
+  "doi": null,
+  "new_regressions_run": false,
+  "note": "This is an archive of previously executed outputs and source code, not an execution of the regressions during release assembly.",
+  "original_source_zip_sha256": "fae61a4df0a88c0a416c1046e1bbc25608f4eb884c82303535a5f37550379fdd",
+  "previous_release_sha256": "078d76d1af9471fcdca84a379ce7a6683e39e1b87ef24f72f3637c4e96f590f2",
+  "private_respondent_records_included": false,
+  "public_repository": null,
+  "published_results_unchanged": true,
+  "source_and_results_file_count": 52,
+  "source_pipeline": "Original unmodified Codex Python archive; separately maintained R audit and supplementary extensions",
+  "title": "Financial Pessimism and the Timing of Saving: Replication Materials",
+  "verified_runs": {
+    "canonical_python": "20261016_140555",
+    "independent_r": "20261016_144150",
+    "optimism": "20261019_100019",
+    "supplementary": "20261019_204702"
+  },
+  "version": "1.1.0"
+}

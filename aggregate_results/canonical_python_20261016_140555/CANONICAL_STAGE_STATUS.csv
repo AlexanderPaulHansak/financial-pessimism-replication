@@ -1,0 +1,6 @@
+stage,status
+extract_original_zip,PASS
+prepare_pilot.py,PASS
+prepare_checks.py,PASS
+complete_equivalence.py,PASS
+verify_canonical_headline.py,PASS
