@@ -8,6 +8,18 @@ Hansak, Alexander (2026). *Financial Pessimism and the Timing of Saving.* Workin
 
 The analysis uses the British Household Panel Survey (BHPS) and Understanding Society (UKHLS). It examines how the association between subjective financial expectations and household saving differs across observation horizons.
 
+## Replication archive
+
+The verified replication materials for *Financial Pessimism and the Timing of Saving* are permanently archived on Zenodo.
+
+**Version 1.1.1:** [https://doi.org/10.5281/zenodo.23494871](https://doi.org/10.5281/zenodo.23494871)
+
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23494871.svg)](https://doi.org/10.5281/zenodo.23494871)
+
+The archive contains the Python, R, and Julia replication code, aggregate empirical results, independent numerical verification, and supporting documentation. Licensed respondent-level BHPS and UKHLS data are not redistributed.
+
+For academic citations, please reference the version-specific Zenodo DOI above.
+
 ## Replication materials
 
 The repository includes the original Python analysis, independent R verification, supplementary empirical analyses, questionnaire documentation, and aggregate results.
